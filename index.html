@@ -2,8 +2,75 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>下載 MapU</title>
+    <title>下載 JLUK</title>
     <meta http-equiv="refresh" content="6;url=https://apps.apple.com/tw/app/jluk/id1626512803">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 26px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin: 0;
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 0;
+            color: #666;
+        }
+        a {
+            color: #667eea;
+            text-decoration: none;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 12px 24px;
+            border-radius: 25px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        a:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+    </style>
     <script>
         // 智能重新導向 - 3秒延遲
         setTimeout(function() {
@@ -17,7 +84,15 @@
     </script>
 </head>
 <body>
-    <p>正在跳轉到 App Store...</p>
-    <p><a href="https://apps.apple.com/tw/app/jluk/id1626512803">如果沒有自動跳轉，請點擊這裡</a></p>
+    <div class="container">
+        <div class="app-icon">
+            <img src="1024.png" alt="JLUK App Icon">
+        </div>
+        <div class="content">
+            <h1>JLUK</h1>
+            <p>Going to App Store...</p>
+            <a href="https://apps.apple.com/tw/app/jluk/id1626512803">如果沒有自動跳轉，請點擊這裡</a>
+        </div>
+    </div>
 </body>
 </html>
