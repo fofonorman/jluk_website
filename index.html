@@ -72,15 +72,58 @@
         }
     </style>
     <script>
+        // 從 URL 參數中提取用戶 ID
+        function getUserIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('userId') || urlParams.get('user') || urlParams.get('id') || '';
+        }
+        
+        // 從 URL 路徑中提取用戶 ID (支援 /user/[userId] 格式)
+        function getUserIdFromPath() {
+            const path = window.location.pathname;
+            const match = path.match(/\/user\/([a-f0-9]+)/);
+            return match ? match[1] : '';
+        }
+        
         // 智能重新導向 - 3秒延遲
         setTimeout(function() {
+            // 優先從路徑提取，其次從參數提取
+            const userId = getUserIdFromPath() || getUserIdFromUrl();
+            
             if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                // 嘗試開啟 App，失敗則跳轉 App Store
-                window.location.href = "mapu://user/" + getEncryptedUserId() || "https://apps.apple.com/tw/app/jluk/id1626512803";
+                if (userId) {
+                    // 嘗試開啟 App 並導向特定用戶頁面
+                    window.location.href = "mapu://user/" + userId;
+                    
+                    // 如果 App 未安裝，2秒後跳轉 App Store
+                    setTimeout(function() {
+                        window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
+                    }, 2000);
+                } else {
+                    // 沒有用戶 ID，開啟 App 主頁
+                    window.location.href = "mapu://";
+                    
+                    // 如果 App 未安裝，2秒後跳轉 App Store
+                    setTimeout(function() {
+                        window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
+                    }, 2000);
+                }
             } else {
                 window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
             }
         }, 3000);
+        
+        // 更新頁面顯示內容
+        document.addEventListener('DOMContentLoaded', function() {
+            const userId = getUserIdFromPath() || getUserIdFromUrl();
+            const statusElement = document.querySelector('p');
+            
+            if (userId) {
+                statusElement.textContent = '正在開啟 JLUK App 並導向用戶頁面...';
+            } else {
+                statusElement.textContent = '正在開啟 JLUK App...';
+            }
+        });
     </script>
 </head>
 <body>
