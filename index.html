@@ -102,63 +102,89 @@
         // 從 URL 參數中提取用戶 ID
         function getUserIdFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('userId') || urlParams.get('user') || urlParams.get('id') || '';
+            const userId = urlParams.get('userId') || urlParams.get('user') || urlParams.get('id') || '';
+            console.log('getUserIdFromUrl:', userId);
+            return userId;
         }
         
         // 從 URL 路徑中提取用戶 ID (支援 /user/[userId] 格式)
         function getUserIdFromPath() {
             const path = window.location.pathname;
+            console.log('Current path:', path);
             const match = path.match(/\/user\/([a-f0-9]+)/);
-            return match ? match[1] : '';
+            const userId = match ? match[1] : '';
+            console.log('getUserIdFromPath:', userId);
+            return userId;
         }
         
         // 智能重新導向 - 3秒延遲
         setTimeout(function() {
+            console.log('=== 開始執行跳轉邏輯 ===');
+            console.log('User Agent:', navigator.userAgent);
+            console.log('Current URL:', window.location.href);
+            
             // 優先從路徑提取，其次從參數提取
             const userId = getUserIdFromPath() || getUserIdFromUrl();
+            console.log('Final userId:', userId);
             
-            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                 if (userId) {
-                     // 嘗試開啟 App 並導向特定用戶頁面
-                     try {
-                         window.location.href = "mapu://user/" + userId;
-                     } catch (e) {
-                         console.log('App URL failed, redirecting to App Store');
-                         window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
-                     }
-                     
-                     // 如果 App 未安裝，2秒後跳轉 App Store
-                     setTimeout(function() {
-                         window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
-                     }, 2000);
-                 } else {
-                     // 沒有用戶 ID，開啟 App 主頁
-                     try {
-                         window.location.href = "mapu://";
-                     } catch (e) {
-                         console.log('App URL failed, redirecting to App Store');
-                         window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
-                     }
-                     
-                     // 如果 App 未安裝，2秒後跳轉 App Store
-                     setTimeout(function() {
-                         window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
-                     }, 2000);
-                 }
+            const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+            console.log('Is iOS device:', isIOS);
+            
+            if (isIOS) {
+                let appUrl;
+                if (userId) {
+                    appUrl = `mapu://user/${userId}`;
+                    console.log('有用戶 ID，準備開啟:', appUrl);
+                } else {
+                    appUrl = 'mapu://';
+                    console.log('沒有用戶 ID，開啟 App 主頁:', appUrl);
+                }
+                
+                // 使用 iframe 避免錯誤彈窗
+                console.log('創建 iframe...');
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = appUrl;
+                
+                // 添加 iframe 事件監聽
+                iframe.onload = function() {
+                    console.log('iframe onload 觸發');
+                };
+                iframe.onerror = function(e) {
+                    console.log('iframe onerror 觸發:', e);
+                };
+                
+                document.body.appendChild(iframe);
+                console.log('iframe 已添加到頁面');
+                
+                // 1.5秒後如果還在網頁，說明 App 未安裝，跳轉 App Store
+                setTimeout(function() {
+                    console.log('1.5秒後檢查，準備跳轉 App Store');
+                    if (document.body.contains(iframe)) {
+                        console.log('移除 iframe');
+                        document.body.removeChild(iframe);
+                    }
+                    console.log('跳轉到 App Store');
+                    window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
+                }, 1500);
             } else {
+                console.log('非 iOS 設備，直接跳轉 App Store');
                 window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
             }
         }, 3000);
         
         // 更新頁面顯示內容
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== DOM 載入完成 ===');
             const userId = getUserIdFromPath() || getUserIdFromUrl();
             const statusElement = document.querySelector('p');
             
             if (userId) {
                 statusElement.textContent = '正在開啟 JLUK App 並導向用戶頁面...';
+                console.log('更新頁面文字：導向用戶頁面');
             } else {
                 statusElement.textContent = '正在開啟 JLUK App...';
+                console.log('更新頁面文字：開啟 App');
             }
         });
     </script>
