@@ -5,8 +5,8 @@
                 "appIDs": ["WS55HV33U8.in.mapu.MapU"],
                 "components": [
                     {
-                        "/": "*",
-                        "comment": "處理所有路徑"
+                        "/user/*": "/user/*",
+                        "comment": "處理所有 /user/ 開頭的路徑"
                     }
                 ]
             }
