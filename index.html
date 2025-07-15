@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>下載 JLUK</title>
-    <meta http-equiv="refresh" content="6;url=https://apps.apple.com/tw/app/jluk/id1626512803">
+    <!-- 暫時註釋掉 meta refresh -->
+    <!-- <meta http-equiv="refresh" content="6;url=https://apps.apple.com/tw/app/jluk/id1626512803"> -->
     <style>
         body {
             margin: 0;
@@ -118,6 +119,8 @@
         }
         
         // 智能重新導向 - 3秒延遲
+        // 暫時註釋掉 setTimeout
+        /*
         setTimeout(function() {
             console.log('=== 開始執行跳轉邏輯 ===');
             console.log('User Agent:', navigator.userAgent);
@@ -172,6 +175,7 @@
                 window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
             }
         }, 3000);
+        */
         
         // 更新頁面顯示內容
         document.addEventListener('DOMContentLoaded', function() {
