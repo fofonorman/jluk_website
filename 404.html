@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>下載 JLUK</title>
-    <!-- 註解掉跳轉 -->
+    <title>404 Not Found</title>  // 改成簡單標題，避免混淆
+    // 移除或註解 meta refresh
     <!-- <meta http-equiv="refresh" content="6;url=https://apps.apple.com/tw/app/jluk/id1626512803"> -->
     <style>
         body {
@@ -109,27 +109,8 @@
         // }
         
         // 智能重新導向 - 3秒延遲
-        setTimeout(function() {
-            const userId = getUserIdFromPath();
-            
-            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                if (userId) {
-                    // 嘗試開啟 App 並導向特定用戶頁面
-                    window.location.href = "mapu://user/" + userId;
-                    
-                    // 如果 App 未安裝，2秒後跳轉 App Store
-                    setTimeout(function() {
-                        window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
-                    }, 2000);
-                } else {
-                    // 沒有用戶 ID，直接跳轉 App Store
-                    window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
-                }
-            } else {
-                // 非 iOS 設備，直接跳轉 App Store
-                window.location.href = "https://apps.apple.com/tw/app/jluk/id1626512803";
-            }
-        }, 3000);
+        // 移除或註解 JS 邏輯
+        // setTimeout(function() { ... }, 3000);
         
         // 更新頁面內容顯示用戶 ID（如果有的話）
         document.addEventListener('DOMContentLoaded', function() {
@@ -157,3 +138,4 @@
     </div>
 </body>
 </html>
+<p>頁面未找到。</p>  // 簡單訊息
