@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>下載 JLUK</title>
-    <meta http-equiv="refresh" content="6;url=https://apps.apple.com/tw/app/jluk/id1626512803">
+    <!-- 註解掉跳轉 -->
+    <!-- <meta http-equiv="refresh" content="6;url=https://apps.apple.com/tw/app/jluk/id1626512803"> -->
     <style>
         body {
             margin: 0;
@@ -100,11 +101,12 @@
     </style>
     <script>
         // 從 URL 路徑中提取用戶 ID
-        function getUserIdFromPath() {
-            const path = window.location.pathname;
-            const match = path.match(/\/user\/([a-f0-9]+)/);
-            return match ? match[1] : '';
-        }
+        // 註解掉 JS 跳轉邏輯
+        // function getUserIdFromPath() {
+        //     const path = window.location.pathname;
+        //     const match = path.match(/\/user\/([a-f0-9]+)/);
+        //     return match ? match[1] : '';
+        // }
         
         // 智能重新導向 - 3秒延遲
         setTimeout(function() {
