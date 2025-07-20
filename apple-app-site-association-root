@@ -1,0 +1,19 @@
+---
+layout: none
+permalink: /apple-app-site-association
+---
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["WS55HV33U8.in.mapu.MapU"],
+        "components": [
+          {
+            "/": "/user/*",
+            "comment": "Matches any URL whose path starts with /user/"
+          }
+        ]
+      }
+    ]
+  }
+}
