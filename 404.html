@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>404 Not Found</title>  // 改成簡單標題，避免混淆
-    // 移除或註解 meta refresh
+    <title>404 Not Found</title>
+    <!-- 移除或註解 meta refresh -->
     <!-- <meta http-equiv="refresh" content="6;url=https://apps.apple.com/tw/app/jluk/id1626512803"> -->
     <style>
         body {
@@ -99,31 +99,6 @@
             transform: translateY(-2px);
         }
     </style>
-    <script>
-        // 從 URL 路徑中提取用戶 ID
-        // 註解掉 JS 跳轉邏輯
-        // function getUserIdFromPath() {
-        //     const path = window.location.pathname;
-        //     const match = path.match(/\/user\/([a-f0-9]+)/);
-        //     return match ? match[1] : '';
-        // }
-        
-        // 智能重新導向 - 3秒延遲
-        // 移除或註解 JS 邏輯
-        // setTimeout(function() { ... }, 3000);
-        
-        // 更新頁面內容顯示用戶 ID（如果有的話）
-        document.addEventListener('DOMContentLoaded', function() {
-            const userId = getUserIdFromPath();
-            const statusElement = document.getElementById('status');
-            
-            if (userId) {
-                statusElement.textContent = '正在開啟 JLUK App 並導向用戶頁面...';
-            } else {
-                statusElement.textContent = '正在跳轉到 App Store...';
-            }
-        });
-    </script>
 </head>
 <body>
     <div class="container">
@@ -132,10 +107,9 @@
         </div>
         <div class="content">
             <h1>JLUK</h1>
-            <p id="status">正在處理您的請求...</p>
-            <a href="https://apps.apple.com/tw/app/jluk/id1626512803">如果沒有自動跳轉，請點擊這裡</a>
+            <p>頁面未找到</p>
+            <a href="https://apps.apple.com/tw/app/jluk/id1626512803">前往 App Store 下載</a>
         </div>
     </div>
 </body>
 </html>
-<p>頁面未找到。</p>  // 簡單訊息
